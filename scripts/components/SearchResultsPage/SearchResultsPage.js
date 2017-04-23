@@ -12,7 +12,7 @@ class SearchResultsPage extends Component {
 
 		return (
 			<section className="searchResultsPage">
-				Search Results page
+				{JSON.stringify(this.props.searchResults)}
 			</section>
 		);
 	}

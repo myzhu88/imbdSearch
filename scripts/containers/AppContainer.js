@@ -15,10 +15,12 @@ class AppContainer extends Component {
 		super(props);
 		this.state={
 			page: 'welcome',
-			showSearchErrorTooltip: false
+			showSearchErrorTooltip: false,
 		}
+		this.searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
+		this.searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
 		this.searchResults=[]; //returned search results
-		this.movieQuery = '';
+		this.query = '';
 	}
 
 	//hides the error tooltip
@@ -33,39 +35,36 @@ class AppContainer extends Component {
 
 	//sets the textfield value to this.movieQuery
 	setQueryString=(e)=>{
-		this.movieQuery = e.target.value;
+		this.query = e.target.value;
 	}
 
 	//Event handler to toggle search when the search button is clicked
 	toggleSearch=()=> {
 		const self = this;
-		const searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
-		const searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
-		let searchResults = {};
-		let movieQuery = this.movieQuery.trim();
-
+		let movieQuery = this.query.trim();
 		//check to see if search field is empty
 		if (!movieQuery || 0 === movieQuery.length) {  //if empty field
 			this.showSearchErrorTooltip();
 		} else {  //if field is not empty
-			let queryURL = searchURI+movieQuery.replace(/\s+/g, '+')+searchType;;  //create the url
+			let queryURL = self.searchURI+movieQuery.replace(/\s+/g, '+')+self.searchType;  //create the url
 			axios({
 			  method:'get',
 			  url: queryURL,
 			  responseType:'json'
 			})
 			.then(function(response) { //Promise returned successfully
-			  searchResults = response.data;
-			  console.log(searchResults);
+			   let searchResponse = response.data;
 			  //check to see if any results are found
-			  if (!searchResults.Error) { //if  results are found
-			  	
+			  if (!searchResponse.Error) { //if  results are found
+			  	self.searchResults = searchResponse.Search;
+			  	self.setState({page: 'searchResults'});
 			  } else{  //if no results found
-			  	
+			  	self.setState({page: 'noResults'});
 			  }
 			},
 			function(err) {  //Promise failed
-				
+				console.warn('Axios request failed');
+				self.setState({page: 'noResults'});
 			});	
 		}
 	}
