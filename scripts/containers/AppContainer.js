@@ -16,10 +16,10 @@ class AppContainer extends Component {
 		this.state={
 			page: 'welcome',
 			showSearchErrorTooltip: false,
+			searchResults: []
 		}
 		this.searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
 		this.searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
-		this.searchResults=[]; //returned search results
 		this.query = '';
 	}
 
@@ -56,7 +56,7 @@ class AppContainer extends Component {
 			   let searchResponse = response.data;
 			  //check to see if any results are found
 			  if (!searchResponse.Error) { //if  results are found
-			  	self.searchResults = searchResponse.Search;
+			  	self.setState({searchResults: searchResponse});
 			  	self.setState({page: 'searchResults'});
 			  } else{  //if no results found
 			  	self.setState({page: 'noResults'});
@@ -77,7 +77,7 @@ class AppContainer extends Component {
 				pageToShow = (<WelcomePage />);
 				break;
 			case 'searchResults':
-				pageToShow = (<SearchResultsPage searchResults={this.searchResults} />);
+				pageToShow = (<SearchResultsPage searchResults={this.state.searchResults} />);
 				break;
 			case 'noResults':
 				pageToShow = (<NoResultsPage />);
