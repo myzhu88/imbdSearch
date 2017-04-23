@@ -17,8 +17,8 @@ IMBD Search Readme
 
 -Troubleshooting:
 	-Make sure you are running version 6.10.2 of Node.js
-	-After running the "gulp" command, if you get an error message saying gulp is not recognized, run the 
-	 following command "npm install gulp".
+	-After running the "gulp" command, if you get an error message saying gulp is not recognized, run 
+	 the following command "npm install gulp".
 	-If a web browser does not automatically open after running the "gulp" command, please open a web 
 	 browser and enter the following url: "http://localhost:3000/"
 
