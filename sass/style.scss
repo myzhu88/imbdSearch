@@ -1,1 +1,30 @@
-
+//Styling for search bar
+.searchContainer{
+	background-color: #000000;
+	color: #ffffff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	&.row {
+		margin: 0;  //override the default -15px left/right margins in Boostrap rows
+	}
+	.headerTitle {
+		padding-left: 10px;
+	}
+	.searchComponent {
+		.searchLabel {
+			display: block;
+		}
+		.searchTextField {
+			color: #000000;
+			width: 100%;
+		}
+	}
+	.findButtonContainer {
+		margin-top: 20px;
+	}
+	.errorTooltip {
+		background-color: #ef0000;
+		position: absolute;
+		padding: 10px;
+	}
+}

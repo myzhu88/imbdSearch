@@ -1,0 +1,20 @@
+.searchContainer {
+  background-color: #000000;
+  color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  .searchContainer.row {
+    margin: 0; }
+  .searchContainer .headerTitle {
+    padding-left: 10px; }
+  .searchContainer .searchComponent .searchLabel {
+    display: block; }
+  .searchContainer .searchComponent .searchTextField {
+    color: #000000;
+    width: 100%; }
+  .searchContainer .findButtonContainer {
+    margin-top: 20px; }
+  .searchContainer .errorTooltip {
+    background-color: #ef0000;
+    position: absolute;
+    padding: 10px; }
