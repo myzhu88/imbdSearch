@@ -77,6 +77,9 @@ class AppContainer extends Component {
 		this.setState({imdbIDValue: imdbID, page:'viewDetails'});
 
 	}
+	returnToSearch=()=> {
+		this.setState({page: 'searchResults'});
+	}
 
 	//handles pagination for search results
 	handlePagination=(pageNum)=> {
@@ -117,7 +120,7 @@ class AppContainer extends Component {
 				pageToShow = (<NoResultsPage />);
 				break;
 			case 'viewDetails':
-				pageToShow = (<ViewDetailsPage imdbID={this.state.imdbIDValue}/>);
+				pageToShow = (<ViewDetailsPage imdbID={this.state.imdbIDValue} returnToSearch={this.returnToSearch}/>);
 			default:
 				null;
 		}

@@ -26,6 +26,7 @@
 		background-color: #ef0000;
 		position: absolute;
 		padding: 10px;
+		z-index: 10;
 	}
 }
 
@@ -47,6 +48,10 @@
 		height: 100px;
 		padding-top: 40px;
 		color: #ff0000;
+		outline: 1px solid #ff0000;
+		@media screen and (max-width: 767px) {
+	    	outline: 0;
+	    }
 	}
 	img {
     	height: auto; 
@@ -68,5 +73,53 @@
 		@media screen and (min-width: 768px) {
 		padding-top: 40px;
 		}
+	}
+}
+
+//Styling for ViewDetailsPage
+.viewDetailsPage {
+	margin: 20px 0;
+	border: 1px solid #000000;
+	padding: 10px 0;
+	.row.removeMargin {
+		margin: auto 0px;
+	}
+	.noImg {
+		padding-top: 40px;
+		color: #ff0000;
+		outline: 1px solid #ff0000;
+		height:300px;
+		text-align: center;
+
+		@media screen and (max-width: 767px) {
+	    	height:100px;
+	    }
+	
+	}
+	img {
+    	height: auto; 
+	    width: auto; 
+	    max-width: 300px; 
+	    max-height: 300px;	
+	}
+	.ratingsComponent {
+		padding-right: 10px;
+		position:relative;
+		top: -2px;
+	}
+	.plotDetailsContainer.row{
+		margin-top: 30px;
+	}
+	.togglePlot {
+		padding: 0 15px;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	.plotPanel {
+		margin: 0 15px;
+	}
+	.returnToSaveBtn {
+		margin: 15px;
 	}
 }

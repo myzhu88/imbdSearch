@@ -17,7 +17,8 @@
   .searchContainer .errorTooltip {
     background-color: #ef0000;
     position: absolute;
-    padding: 10px; }
+    padding: 10px;
+    z-index: 10; }
 
 .welcomePage {
   text-align: center; }
@@ -32,7 +33,11 @@
   .resultRow.row .noImg {
     height: 100px;
     padding-top: 40px;
-    color: #ff0000; }
+    color: #ff0000;
+    outline: 1px solid #ff0000; }
+    @media screen and (max-width: 767px) {
+      .resultRow.row .noImg {
+        outline: 0; } }
   .resultRow.row img {
     height: auto;
     width: auto;
@@ -49,3 +54,38 @@
     @media screen and (min-width: 768px) {
       .resultRow.row .verticalAlign {
         padding-top: 40px; } }
+
+.viewDetailsPage {
+  margin: 20px 0;
+  border: 1px solid #000000;
+  padding: 10px 0; }
+  .viewDetailsPage .row.removeMargin {
+    margin: auto 0px; }
+  .viewDetailsPage .noImg {
+    padding-top: 40px;
+    color: #ff0000;
+    outline: 1px solid #ff0000;
+    height: 300px;
+    text-align: center; }
+    @media screen and (max-width: 767px) {
+      .viewDetailsPage .noImg {
+        height: 100px; } }
+  .viewDetailsPage img {
+    height: auto;
+    width: auto;
+    max-width: 300px;
+    max-height: 300px; }
+  .viewDetailsPage .ratingsComponent {
+    padding-right: 10px;
+    position: relative;
+    top: -2px; }
+  .viewDetailsPage .plotDetailsContainer.row {
+    margin-top: 30px; }
+  .viewDetailsPage .togglePlot {
+    padding: 0 15px; }
+    .viewDetailsPage .togglePlot:hover {
+      cursor: pointer; }
+  .viewDetailsPage .plotPanel {
+    margin: 0 15px; }
+  .viewDetailsPage .returnToSaveBtn {
+    margin: 15px; }
