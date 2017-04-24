@@ -69,6 +69,31 @@ class AppContainer extends Component {
 		}
 	}
 
+	//handles pagination for search results
+	handlePagination=(pageNum)=> {
+		const self = this;
+		let queryURL = self.searchURI+this.query.replace(/\s+/g, '+')+self.searchType+'&page='+pageNum;  //create the url
+			axios({
+			  method:'get',
+			  url: queryURL,
+			  responseType:'json'
+			})
+			.then(function(response) { //Promise returned successfully
+			   let searchResponse = response.data;
+			  //check to see if any results are found
+			  if (!searchResponse.Error) { //if  results are found
+			  	self.setState({searchResults: searchResponse});
+			  	self.setState({page: 'searchResults'});
+			  } else{  //if no results found
+			  	self.setState({page: 'noResults'});
+			  }
+			},
+			function(err) {  //Promise failed
+				console.warn('Axios request failed');
+				self.setState({page: 'noResults'});
+			});
+	}
+
 	render() {
 		let getPageToShow = this.state.page;
 		let pageToShow = null;
@@ -77,7 +102,7 @@ class AppContainer extends Component {
 				pageToShow = (<WelcomePage />);
 				break;
 			case 'searchResults':
-				pageToShow = (<SearchResultsPage searchResults={this.state.searchResults} />);
+				pageToShow = (<SearchResultsPage searchResults={this.state.searchResults} handlePagination={this.handlePagination}/>);
 				break;
 			case 'noResults':
 				pageToShow = (<NoResultsPage />);
