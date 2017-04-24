@@ -5,6 +5,7 @@ import SearchBar from './../components/SearchBar/SearchBar';
 import WelcomePage from './../components/WelcomePage/WelcomePage';
 import SearchResultsPage from './../components/SearchResultsPage/SearchResultsPage';
 import NoResultsPage from './../components/NoResultsPage/NoResultsPage';
+import ViewDetailsPage from './../components/ViewDetailsPage/ViewDetailsPage';
 
 
 
@@ -17,7 +18,8 @@ class AppContainer extends Component {
 			page: 'welcome',
 			showSearchErrorTooltip: false,
 			searchResults: [],
-			searchPageNum: 1
+			searchPageNum: 1,
+			imdbIDValue: null
 		}
 		this.searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
 		this.searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
@@ -70,6 +72,12 @@ class AppContainer extends Component {
 		}
 	}
 
+	//handles view details page
+	viewSearchDetails=(imdbID)=>{
+		this.setState({imdbIDValue: imdbID, page:'viewDetails'});
+
+	}
+
 	//handles pagination for search results
 	handlePagination=(pageNum)=> {
 		const self = this;
@@ -103,11 +111,13 @@ class AppContainer extends Component {
 				pageToShow = (<WelcomePage />);
 				break;
 			case 'searchResults':
-				pageToShow = (<SearchResultsPage pageNum={this.state.pageNum} searchResults={this.state.searchResults} handlePagination={this.handlePagination}/>);
+				pageToShow = (<SearchResultsPage pageNum={this.state.pageNum} searchResults={this.state.searchResults} viewSearchDetails={this.viewSearchDetails} handlePagination={this.handlePagination}/>);
 				break;
 			case 'noResults':
 				pageToShow = (<NoResultsPage />);
 				break;
+			case 'viewDetails':
+				pageToShow = (<ViewDetailsPage imdbID={this.state.imdbIDValue}/>);
 			default:
 				null;
 		}

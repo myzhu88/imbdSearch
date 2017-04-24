@@ -16,7 +16,7 @@ class SearchResultsPage extends Component {
 		let pageNumber = self.props.pageNum;
 		let resultRowList = self.searchResultList.map(function(result, index) {
 			let searchIndex = (pageNumber-1)*10 +index+1;  //gets the index of the search results
-			return (<ResultRow data={result} searchIndex={searchIndex} key={'searchRow'+searchIndex}/>);
+			return (<ResultRow data={result} viewSearchDetails={self.props.viewSearchDetails} searchIndex={searchIndex} key={'searchRow'+searchIndex}/>);
 		});
 
 		return resultRowList;
