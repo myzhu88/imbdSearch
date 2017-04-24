@@ -27,11 +27,19 @@
   margin: 10px 0;
   padding: 5px 0;
   text-align: center; }
+  .resultRow.row:nth-child(odd) {
+    background-color: #efeeee; }
   .resultRow.row img {
     height: auto;
     width: auto;
     max-width: 100px;
     max-height: 100px; }
+    @media screen and (max-width: 767px) {
+      .resultRow.row img {
+        padding-bottom: 5px; } }
+  @media screen and (max-width: 767px) {
+    .resultRow.row .column {
+      border-top: 1px solid #000000; } }
   .resultRow.row .verticalAlign {
     padding: 10px 0; }
     @media screen and (min-width: 768px) {

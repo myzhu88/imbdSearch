@@ -40,17 +40,28 @@
 	margin: 10px 0;
 	padding:5px 0;
 	text-align: center;
+	&:nth-child(odd) {
+		background-color: #efeeee;
+	}
 	img {
     	height: auto; 
 	    width: auto; 
 	    max-width: 100px; 
 	    max-height: 100px;
-	}
-		.verticalAlign {
-			padding:10px 0;
-			@media screen and (min-width: 768px) {
-			padding-top: 40px;
 
-			}
+	    @media screen and (max-width: 767px) {
+	    	padding-bottom: 5px;
+	    }
+	}
+	.column {
+		@media screen and (max-width: 767px) {
+			border-top: 1px solid #000000;
 		}
+	}
+	.verticalAlign {
+		padding:10px 0;
+		@media screen and (min-width: 768px) {
+		padding-top: 40px;
+		}
+	}
 }
