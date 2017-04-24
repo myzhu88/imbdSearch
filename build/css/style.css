@@ -29,6 +29,10 @@
   text-align: center; }
   .resultRow.row:nth-child(odd) {
     background-color: #efeeee; }
+  .resultRow.row .noImg {
+    height: 100px;
+    padding-top: 40px;
+    color: #ff0000; }
   .resultRow.row img {
     height: auto;
     width: auto;

@@ -16,7 +16,8 @@ class AppContainer extends Component {
 		this.state={
 			page: 'welcome',
 			showSearchErrorTooltip: false,
-			searchResults: []
+			searchResults: [],
+			searchPageNum: 1
 		}
 		this.searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
 		this.searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
@@ -57,7 +58,7 @@ class AppContainer extends Component {
 			  //check to see if any results are found
 			  if (!searchResponse.Error) { //if  results are found
 			  	self.setState({searchResults: searchResponse});
-			  	self.setState({page: 'searchResults'});
+			  	self.setState({page: 'searchResults', pageNum: 1});
 			  } else{  //if no results found
 			  	self.setState({page: 'noResults'});
 			  }
@@ -83,7 +84,7 @@ class AppContainer extends Component {
 			  //check to see if any results are found
 			  if (!searchResponse.Error) { //if  results are found
 			  	self.setState({searchResults: searchResponse});
-			  	self.setState({page: 'searchResults'});
+			  	self.setState({page: 'searchResults', pageNum: pageNum});
 			  } else{  //if no results found
 			  	self.setState({page: 'noResults'});
 			  }
@@ -102,7 +103,7 @@ class AppContainer extends Component {
 				pageToShow = (<WelcomePage />);
 				break;
 			case 'searchResults':
-				pageToShow = (<SearchResultsPage searchResults={this.state.searchResults} handlePagination={this.handlePagination}/>);
+				pageToShow = (<SearchResultsPage pageNum={this.state.pageNum} searchResults={this.state.searchResults} handlePagination={this.handlePagination}/>);
 				break;
 			case 'noResults':
 				pageToShow = (<NoResultsPage />);

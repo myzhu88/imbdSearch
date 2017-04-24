@@ -16,7 +16,7 @@ class ResultRow extends Component {
 		return(
 			<Row className='resultRow'>
 				<Col xsHidden sm={1} className="column"><div className='verticalAlign'>{searchIndex+'.'}</div></Col>
-				<Col xs={12} sm={2} className="movieImgContainer">{<img src={imgSRC} className="movieImg"/>}</Col>
+				<Col xs={12} sm={2} className="movieImgContainer">{imgSRC=='N/A' ? <div className='noImg'>No Image</div> : <img src={imgSRC} className="movieImg"/>}</Col>
 				<Col xs={12} sm={5} className="column"><div className='verticalAlign'>{title}</div></Col>
 				<Col xs={12} sm={2} className="column"><div className='verticalAlign'><strong>Release: </strong>{releaseYear}</div></Col>
 				<Col xs={12} sm={2} className="column"><div className='verticalAlign'><Button bsStyle="success" bsSize="small" onClick={this.viewSearchDetails}>View Details</Button></div></Col>

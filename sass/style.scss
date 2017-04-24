@@ -43,6 +43,11 @@
 	&:nth-child(odd) {
 		background-color: #efeeee;
 	}
+	.noImg {
+		height: 100px;
+		padding-top: 40px;
+		color: #ff0000;
+	}
 	img {
     	height: auto; 
 	    width: auto; 
