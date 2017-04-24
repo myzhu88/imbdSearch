@@ -42,5 +42,13 @@
     "react-mixin": "3.0.0",
     "react-rating": "^0.7.1",
     "react-router": "^1.0.0-rc3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myzhu88/imbdSearch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/myzhu88/imbdSearch/issues"
+  },
+  "homepage": "https://github.com/myzhu88/imbdSearch#readme"
 }
