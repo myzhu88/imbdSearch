@@ -6,6 +6,7 @@ import WelcomePage from './../components/WelcomePage/WelcomePage';
 import SearchResultsPage from './../components/SearchResultsPage/SearchResultsPage';
 import NoResultsPage from './../components/NoResultsPage/NoResultsPage';
 import ViewDetailsPage from './../components/ViewDetailsPage/ViewDetailsPage';
+import Loader from './../components/Loader/Loader';
 
 
 
@@ -19,10 +20,10 @@ class AppContainer extends Component {
 			showSearchErrorTooltip: false,
 			searchResults: [],
 			searchPageNum: 1,
-			imdbIDValue: null
+			imdbData: null,
+			loading: false
 		}
-		this.searchURI = 'http://www.omdbapi.com/?s='; //endpoint for search query
-		this.searchType = '&type=movie'; //hardcoing the type of search results to return as movie for now.  May implement TV series later
+		this.searchURI = 'http://www.theimdbapi.org/api/find/movie?title='; //endpoint for search query
 		this.query = '';
 	}
 
@@ -44,12 +45,13 @@ class AppContainer extends Component {
 	//Event handler to toggle search when the search button is clicked
 	toggleSearch=()=> {
 		const self = this;
+		self.setState({loading: true})
 		let movieQuery = this.query.trim();
 		//check to see if search field is empty
 		if (!movieQuery || 0 === movieQuery.length) {  //if empty field
 			this.showSearchErrorTooltip();
 		} else {  //if field is not empty
-			let queryURL = self.searchURI+movieQuery.replace(/\s+/g, '+')+self.searchType;  //create the url
+			let queryURL = self.searchURI+movieQuery.replace(/\s+/g, '+');  //create the url
 			axios({
 			  method:'get',
 			  url: queryURL,
@@ -58,52 +60,26 @@ class AppContainer extends Component {
 			.then(function(response) { //Promise returned successfully
 			   let searchResponse = response.data;
 			  //check to see if any results are found
-			  if (!searchResponse.Error) { //if  results are found
-			  	self.setState({searchResults: searchResponse});
-			  	self.setState({page: 'searchResults', pageNum: 1});
+			  if (searchResponse) { //if  results are found
+			  	self.setState({searchResults: searchResponse,page: 'searchResults', pageNum: 1, loading: false});
 			  } else{  //if no results found
-			  	self.setState({page: 'noResults'});
+			  	self.setState({page: 'noResults', loading: false});
 			  }
 			},
 			function(err) {  //Promise failed
 				console.warn('Axios request failed');
-				self.setState({page: 'noResults'});
+				self.setState({page: 'noResults', loading:false});
 			});	
 		}
 	}
 
 	//handles view details page
-	viewSearchDetails=(imdbID)=>{
-		this.setState({imdbIDValue: imdbID, page:'viewDetails'});
+	viewSearchDetails=(data)=>{
+		this.setState({imdbData: data, page:'viewDetails'});
 
 	}
 	returnToSearch=()=> {
 		this.setState({page: 'searchResults'});
-	}
-
-	//handles pagination for search results
-	handlePagination=(pageNum)=> {
-		const self = this;
-		let queryURL = self.searchURI+this.query.replace(/\s+/g, '+')+self.searchType+'&page='+pageNum;  //create the url
-			axios({
-			  method:'get',
-			  url: queryURL,
-			  responseType:'json'
-			})
-			.then(function(response) { //Promise returned successfully
-			   let searchResponse = response.data;
-			  //check to see if any results are found
-			  if (!searchResponse.Error) { //if  results are found
-			  	self.setState({searchResults: searchResponse});
-			  	self.setState({page: 'searchResults', pageNum: pageNum});
-			  } else{  //if no results found
-			  	self.setState({page: 'noResults'});
-			  }
-			},
-			function(err) {  //Promise failed
-				console.warn('Axios request failed');
-				self.setState({page: 'noResults'});
-			});
 	}
 
 	render() {
@@ -120,7 +96,7 @@ class AppContainer extends Component {
 				pageToShow = (<NoResultsPage />);
 				break;
 			case 'viewDetails':
-				pageToShow = (<ViewDetailsPage imdbID={this.state.imdbIDValue} returnToSearch={this.returnToSearch}/>);
+				pageToShow = (<ViewDetailsPage imdbData={this.state.imdbData} returnToSearch={this.returnToSearch}/>);
 			default:
 				null;
 		}
@@ -129,8 +105,7 @@ class AppContainer extends Component {
 		return(
 			<article>
 				<SearchBar showErrorTooltip={this.state.showSearchErrorTooltip} toggleSearch={this.toggleSearch} setQueryString={this.setQueryString} hideErrorTooltip={this.hideSearchErrorTooltip}/>
-				<Grid className="bodyContainer">{pageToShow}</Grid>
-							
+				{this.state.loading ? <div className="loaderContainer"><Loader /></div> : <Grid className="bodyContainer">{pageToShow}</Grid>}					
 			</article>
 		);
 	}

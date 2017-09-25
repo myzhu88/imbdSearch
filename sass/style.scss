@@ -76,6 +76,11 @@
 	}
 }
 
+//Styling for SearchResultsPage
+.paginationContainer {
+	text-align: center;
+}
+
 //Styling for ViewDetailsPage
 .viewDetailsPage {
 	margin: 20px 0;
@@ -122,4 +127,124 @@
 	.returnToSaveBtn {
 		margin: 15px;
 	}
+}
+
+//Loader styling
+.loaderContainer {
+	background-color: rgb(79,79,79);
+	position: fixed;
+	height: 100%;
+	width:100%;
+	display: table;
+
+	.loader {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
+
+$pink: #EE71A6; 
+$dark: #17120B;
+$orange: #EEB771;
+
+@keyframes tint{
+  
+  50%{
+    border: 1px solid $orange;
+  }
+
+  
+}
+
+@keyframes fill{
+  
+  50%{
+    transform: scale(.8);
+  }
+}
+
+*, :before, :after{
+  box-sizing: border-box;
+}
+
+body, html{
+  font-size: 18px;
+  height: 100%;
+  padding: 0;
+}
+body{
+  background: $dark;
+  font-family: 'PT Sans', sans-serif;
+}
+
+
+#app{
+  background: $dark;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.loader{
+  color: #EEB771;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 0;
+   
+  
+  &__dots__dot{
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    
+    display: inline-block;
+    border: 1px solid white;
+    position: relative;
+    margin-right: 10px;
+    
+    &:before, {
+      content: "";
+      width: 18px;
+      height: 18px;
+      display: block;
+      background: white;
+      position: absolute;
+      transform: scale(.5);
+      top: 0;
+      left: 0;
+      transform-origin: center;
+    }
+    
+    &:nth-child(1){
+      animation: tint 1200ms infinite;
+    
+      &:before{
+        animation: fill 1200ms infinite;
+      }
+    }
+    &:nth-child(2){
+      animation: tint 1200ms infinite 200ms;
+
+      &:before{
+        animation: fill 1200ms infinite 200ms;
+      }
+    }
+    &:nth-child(3){
+      animation: tint 1200ms infinite 400ms;
+
+      &:before{
+        animation: fill 1200ms infinite 400ms;
+      }
+    }
+    
+   
+  }
+  
+  
 }

@@ -8,7 +8,7 @@ class ResultRow extends Component {
 
 	//event handler to view details of the selected movie
 	viewSearchDetails=()=>{
-		this.props.viewSearchDetails(this.props.data.imdbID);
+		this.props.viewSearchDetails(this.props.data);
 	}
 
 	render() {
@@ -16,9 +16,9 @@ class ResultRow extends Component {
 		return(
 			<Row className='resultRow'>
 				<Col xsHidden sm={1} className="column"><div className='verticalAlign'>{ this.props.searchIndex+'.'}</div></Col>
-				<Col xs={12} sm={2} className="movieImgContainer">{this.props.data.Poster=='N/A' ? <div className='noImg'>No Image</div> : <img src={this.props.data.Poster} className="movieImg"/>}</Col>
-				<Col xs={12} sm={5} className="column"><div className='verticalAlign'>{this.props.data.Title}</div></Col>
-				<Col xs={12} sm={2} className="column"><div className='verticalAlign'><strong>Release: </strong>{this.props.data.Year}</div></Col>
+				<Col xs={12} sm={2} className="movieImgContainer">{this.props.data.poster.thumb=='' ? <div className='noImg'>No Image</div> : <img src={this.props.data.poster.thumb} className="movieImg"/>}</Col>
+				<Col xs={12} sm={5} className="column"><div className='verticalAlign'>{this.props.data.title}</div></Col>
+				<Col xs={12} sm={2} className="column"><div className='verticalAlign'><strong>Release: </strong>{this.props.data.year}</div></Col>
 				<Col xs={12} sm={2} className="column"><div className='verticalAlign'><Button bsStyle="success" bsSize="small" onClick={this.viewSearchDetails}>View Details</Button></div></Col>
 			</Row>
 		);
